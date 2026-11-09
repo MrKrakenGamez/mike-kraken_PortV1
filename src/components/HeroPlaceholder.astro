@@ -1,0 +1,41 @@
+<!-- ---
+// TEMPORAL: se reemplaza por el Hero real en la Sección 3.
+// Incluye secciones de relleno para probar los enlaces de la barra (se borran en las secciones 5-10).
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const placeholders = [
+  { id: "about", label: t("nav.about") },
+  { id: "experience", label: t("nav.experience") },
+  { id: "projects", label: t("nav.projects") },
+  { id: "contact", label: t("nav.contact") },
+];
+---
+
+<section
+  class="mx-auto flex min-h-[calc(100dvh-4rem)] max-w-sitio flex-col items-start justify-center gap-6 px-6"
+>
+  <p class="font-mono text-sm text-cian">$ {t("hero.whoami")}</p>
+  <h1
+    class="bg-linear-to-r from-cian to-neon bg-clip-text font-display text-5xl font-bold text-transparent sm:text-7xl"
+  >
+    {t("hero.greeting")}
+  </h1>
+  <p class="max-w-xl text-lg text-bruma">{t("hero.tagline")}</p>
+  <a
+    href="#about"
+    class="rounded-md bg-violeta px-6 py-3 font-display font-medium text-perla shadow-glow-violeta transition hover:shadow-glow-cian"
+  >
+    {t("hero.cta")}
+  </a>
+</section>
+
+{
+  placeholders.map((p) => (
+    <section id={p.id} class="mx-auto flex min-h-[60dvh] max-w-sitio items-center px-6">
+      <h2 class="font-display text-3xl text-perla/80">{p.label}</h2>
+    </section>
+  ))
+} -->

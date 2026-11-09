@@ -49,4 +49,8 @@
       transition-duration: 0.01ms !important;
     }
   }
+    /* Los anclajes (#about, #projects...) no quedan ocultos bajo la barra fija */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
 }

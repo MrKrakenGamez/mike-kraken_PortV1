@@ -1,0 +1,22 @@
+---
+// TEMPORAL: secciones de relleno para probar los enlaces del nav.
+// Se irán reemplazando en las secciones 5 a 10.
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const secciones = [
+  { id: "about", label: t("nav.about") },
+  { id: "experience", label: t("nav.experience") },
+  { id: "projects", label: t("nav.projects") },
+  { id: "contact", label: t("nav.contact") },
+];
+---
+
+{
+  secciones.map((s) => (
+    <section id={s.id} class="mx-auto flex min-h-[60dvh] max-w-sitio items-center px-6">
+      <h2 class="font-display text-3xl text-perla/80">{s.label}</h2>
+    </section>
+  ))
+}

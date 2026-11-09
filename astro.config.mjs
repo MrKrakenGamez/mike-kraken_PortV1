@@ -4,8 +4,16 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
+  // i18n nativo: el sitio vive en /es/... y /en/...
+  i18n: {
+    defaultLocale: "es",
+    locales: ["es", "en"],
+    routing: {
+      prefixDefaultLocale: true, // también el español lleva prefijo: /es/
+      redirectToDefaultLocale: true, // "/" redirige automáticamente a /es/
+    },
+  },
   vite: {
-    // Tailwind v4 se registra como plugin de Vite (NO como integración de Astro)
     plugins: [tailwindcss()],
   },
 });

@@ -1,0 +1,151 @@
+---
+import HeroScene from "./HeroScene.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { site } from "../../data/site";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const roles = [t("hero.role1"), t("hero.role2"), t("hero.role3")];
+---
+
+<section
+  id="hero"
+  class="relative isolate flex min-h-[calc(100dvh-4rem)] items-center overflow-hidden"
+>
+  <!-- Fondo: escena + velo para legibilidad del texto -->
+  <div class="escena absolute inset-0 -z-10" aria-hidden="true">
+    <HeroScene />
+    <div
+      class="absolute inset-0 bg-linear-to-r from-abismo/75 via-abismo/40 to-transparent md:from-abismo/85 md:via-abismo/25"
+    >
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="mx-auto w-full max-w-sitio px-6 py-24">
+    <div class="max-w-2xl">
+      <p class="aparece font-mono text-sm text-cian" style="--i:0">
+        <span class="text-neon">$</span>
+        {t("hero.eyebrow")}<span class="cursor ml-1 inline-block h-4 w-2 translate-y-0.5 bg-cian"
+        ></span>
+      </p>
+
+      <p class="aparece mt-6 font-display text-xl text-bruma" style="--i:1">
+        {t("hero.hello")}
+      </p>
+
+      <h1
+        class="aparece titulo-glow mt-1 bg-linear-to-r from-cian to-neon bg-clip-text font-display text-5xl font-bold leading-[1.05] text-transparent sm:text-7xl lg:text-8xl"
+        style="--i:2"
+      >
+        Mike Kraken
+      </h1>
+
+      <ul class="aparece mt-6 flex flex-wrap gap-2" style="--i:3">
+        {
+          roles.map((rol) => (
+            <li class="rounded-full border border-cian/40 bg-abismo/40 px-3 py-1 font-mono text-xs text-cian">
+              {rol}
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="aparece mt-6 max-w-xl text-lg leading-relaxed text-bruma" style="--i:4">
+        {t("hero.tagline")}
+      </p>
+
+      <div class="aparece mt-10 flex flex-wrap gap-4" style="--i:5">
+        <!-- CV: el archivo PDF lo subes tú a /public/cv/ -->
+        <a
+          href={site.cv[lang]}
+          download
+          class="inline-flex items-center gap-2 rounded-md bg-violeta px-6 py-3 font-display font-medium text-perla shadow-glow-violeta transition hover:shadow-glow-cian"
+        >
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"></path>
+          </svg>
+          {t("hero.ctaCv")}
+        </a>
+        <a
+          href={`/${lang}/#contact`}
+          class="inline-flex items-center rounded-md border border-cian/50 px-6 py-3 font-display font-medium text-cian transition hover:bg-cian/10 hover:shadow-glow-cian"
+        >
+          {t("hero.ctaContact")}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Indicador de scroll -->
+  <a
+    href="#about"
+    class="aparece absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-xs text-bruma transition hover:text-cian"
+    style="--i:7"
+  >
+    {t("hero.scroll")}
+    <span class="linea-scroll block h-8 w-px bg-cian"></span>
+  </a>
+</section>
+
+<style>
+  /* El borde inferior del hero se funde con el fondo de la página */
+  .escena {
+    -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent);
+    mask-image: linear-gradient(to bottom, #000 80%, transparent);
+  }
+
+  /* Entrada escalonada (cada elemento usa --i para su retraso) */
+  @keyframes aparecer {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .aparece {
+    animation: aparecer 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 120ms);
+  }
+
+  /* Cursor parpadeante de terminal */
+  @keyframes parpadeo {
+    50% {
+      opacity: 0;
+    }
+  }
+  .cursor {
+    animation: parpadeo 1s steps(1) infinite;
+  }
+
+  /* Línea del indicador de scroll */
+  @keyframes caer {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    50% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    51% {
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
+  .linea-scroll {
+    animation: caer 2s ease-in-out infinite;
+  }
+
+  /* Resplandor neón detrás del nombre */
+  .titulo-glow {
+    filter: drop-shadow(0 0 22px color-mix(in srgb, var(--kraken-neon) 35%, transparent));
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import { languages, type Lang } from "../i18n/ui";
+import { switchLangPath, useTranslations } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Un enlace por idioma, apuntando a la misma página en el otro idioma
+const items = (Object.keys(languages) as Lang[]).map((code) => ({
+  code,
+  href: switchLangPath(Astro.url.pathname, code),
+  active: code === lang,
+}));
+---
+
+<div
+  role="group"
+  aria-label={t("lang.label")}
+  class="flex items-center gap-1 rounded-full border border-bruma/30 bg-abismo/50 p-1 font-mono text-xs"
+>
+  {
+    items.map(({ code, href, active }) => (
+      <a
+        href={href}
+        hreflang={code}
+        lang={code}
+        title={languages[code]}
+        aria-current={active ? "true" : undefined}
+        class:list={[
+          "rounded-full px-3 py-1 uppercase transition",
+          active
+            ? "bg-violeta text-perla shadow-glow-violeta"
+            : "text-bruma hover:text-cian",
+        ]}
+      >
+        {code}
+      </a>
+    ))
+  }
+</div>

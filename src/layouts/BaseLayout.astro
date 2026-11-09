@@ -1,23 +1,23 @@
 ---
-// Layout base mínimo. En la Sección 2 le sumaremos Nav, Footer e idioma.
+// Layout global: enlace "saltar al contenido", Nav, <main> y Footer.
 import "../styles/global.css";
-
-// Fuentes variables autoalojadas
 import "@fontsource-variable/space-grotesk";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/jetbrains-mono";
 
+import Nav from "../components/Nav.astro";
+// import Footer from "../components/Footer.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
 interface Props {
   title: string;
   description?: string;
-  lang?: "es" | "en";
 }
 
-const {
-  title,
-  description = "Portafolio de Mike Kraken — Full Stack Developer, DevOps y Líder Técnico.",
-  lang = "es",
-} = Astro.props;
+// El idioma se deduce de la URL (/es/... o /en/...)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { title, description = t("meta.description") } = Astro.props;
 ---
 
 <!doctype html>
@@ -30,7 +30,19 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body>
-    <slot />
+  <body class="flex min-h-dvh flex-col">
+    <!-- Accesibilidad: aparece solo al enfocar con teclado -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-violeta focus:px-4 focus:py-2 focus:text-perla"
+    >
+      {t("nav.skip")}
+    </a>
+
+    <Nav lang={lang} />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <!-- <Footer lang={lang} /> -->
   </body>
 </html>
