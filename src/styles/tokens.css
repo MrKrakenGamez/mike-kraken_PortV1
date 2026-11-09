@@ -1,0 +1,61 @@
+/* ==========================================================
+   DESIGN TOKENS — "El kraken en el océano nocturno"
+   Capa 1: variables CSS crudas (fuente de verdad)
+   Capa 2: @theme inline las expone como utilidades Tailwind
+   ========================================================== */
+
+:root {
+  /* ---- Paleta ---- */
+  --kraken-marino: #0a1128;   /* Azul marino profundo: fondo base */
+  --kraken-abismo: #05070f;   /* Negro abisal: contraste */
+  --kraken-violeta: #7c3aed;  /* Violeta eléctrico: acento primario */
+  --kraken-cian: #22d3ee;     /* Neón cian: acento secundario / glow */
+  --kraken-neon: #a855f7;     /* Neón violeta: detalles */
+  --kraken-perla: #e6edf7;    /* Blanco perla: texto principal */
+  --kraken-bruma: #94a3b8;    /* Gris bruma: texto secundario */
+
+  /* ---- Tipografías ---- */
+  --kraken-font-display: "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif;
+  --kraken-font-body: "Inter Variable", "Inter", system-ui, sans-serif;
+  --kraken-font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- Glows (sombras de neón) ---- */
+  --kraken-glow-cian: 0 0 24px rgb(34 211 238 / 0.45);
+  --kraken-glow-violeta: 0 0 28px rgb(124 58 237 / 0.5);
+  --kraken-glow-neon: 0 0 20px rgb(168 85 247 / 0.45);
+
+  /* ---- Radios ---- */
+  --kraken-radio-sm: 0.5rem;
+  --kraken-radio-md: 1rem;
+  --kraken-radio-lg: 1.75rem;
+
+  /* ---- Espaciado de secciones (se usará en cada sección) ---- */
+  --kraken-seccion-y: clamp(4rem, 10vw, 8rem);
+  --kraken-contenedor: 72rem;
+}
+
+/* Expone los tokens como clases: bg-marino, text-perla, font-display, shadow-glow-cian... */
+@theme inline {
+  --color-marino: var(--kraken-marino);
+  --color-abismo: var(--kraken-abismo);
+  --color-violeta: var(--kraken-violeta);
+  --color-cian: var(--kraken-cian);
+  --color-neon: var(--kraken-neon);
+  --color-perla: var(--kraken-perla);
+  --color-bruma: var(--kraken-bruma);
+
+  --font-display: var(--kraken-font-display);
+  --font-body: var(--kraken-font-body);
+  --font-mono: var(--kraken-font-mono);
+
+  --shadow-glow-cian: var(--kraken-glow-cian);
+  --shadow-glow-violeta: var(--kraken-glow-violeta);
+  --shadow-glow-neon: var(--kraken-glow-neon);
+
+  --radius-sm: var(--kraken-radio-sm);
+  --radius-md: var(--kraken-radio-md);
+  --radius-lg: var(--kraken-radio-lg);
+
+  --spacing-seccion: var(--kraken-seccion-y);
+  --container-sitio: var(--kraken-contenedor);
+}

@@ -1,16 +1,32 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Mike Kraken | Full Stack Developer">
+  <main
+    class="mx-auto flex min-h-dvh max-w-sitio flex-col items-start justify-center gap-6 px-6"
+  >
+    <!-- Etiqueta estilo terminal (usa font-mono) -->
+    <p class="font-mono text-sm text-cian">$ whoami</p>
+
+    <!-- Título con degradado cian → violeta neón -->
+    <h1
+      class="bg-linear-to-r from-cian to-neon bg-clip-text font-display text-5xl font-bold text-transparent sm:text-7xl"
+    >
+      Hola, Mike Kraken
+    </h1>
+
+    <p class="max-w-xl text-lg text-bruma">
+      Full Stack Developer · DevOps · Líder Técnico. Bienvenido a las
+      profundidades.
+    </p>
+
+    <!-- Botón de prueba para validar glow, radios y foco -->
+    <a
+      href="#"
+      class="rounded-md bg-violeta px-6 py-3 font-display font-medium text-perla shadow-glow-violeta transition hover:shadow-glow-cian"
+    >
+      Sumergirse
+    </a>
+  </main>
+</BaseLayout>

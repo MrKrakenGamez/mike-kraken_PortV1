@@ -1,0 +1,36 @@
+---
+// Layout base mínimo. En la Sección 2 le sumaremos Nav, Footer e idioma.
+import "../styles/global.css";
+
+// Fuentes variables autoalojadas
+import "@fontsource-variable/space-grotesk";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: "es" | "en";
+}
+
+const {
+  title,
+  description = "Portafolio de Mike Kraken — Full Stack Developer, DevOps y Líder Técnico.",
+  lang = "es",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0A1128" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

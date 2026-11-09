@@ -1,0 +1,52 @@
+/* Tailwind primero, luego nuestros tokens */
+@import "tailwindcss";
+@import "./tokens.css";
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    font-family: var(--font-body);
+    color: var(--color-perla);
+    background-color: var(--color-marino);
+    /* Profundidad: luz tenue arriba y abismo abajo (nada plano) */
+    background-image:
+      radial-gradient(60rem 30rem at 50% -10%, rgb(124 58 237 / 0.18), transparent 70%),
+      linear-gradient(to bottom, transparent 40%, var(--color-abismo));
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  /* Foco visible para accesibilidad con teclado */
+  :focus-visible {
+    outline: 2px solid var(--color-cian);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Color de selección de texto acorde a la marca */
+  ::selection {
+    background: var(--color-violeta);
+    color: var(--color-perla);
+  }
+
+  /* Respeta usuarios que piden menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
