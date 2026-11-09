@@ -1,0 +1,77 @@
+---
+import Terminal from "./Terminal.astro";
+import { terminal } from "../../data/about";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const parrafos = [t("about.p1"), t("about.p2"), t("about.p3"), t("about.p4")];
+const hechos = [
+  { valor: t("about.fact1.value"), etiqueta: t("about.fact1.label") },
+  { valor: t("about.fact2.value"), etiqueta: t("about.fact2.label") },
+  { valor: t("about.fact3.value"), etiqueta: t("about.fact3.label") },
+];
+---
+
+<section
+  id="about"
+  aria-labelledby="about-titulo"
+  class="mx-auto max-w-sitio px-6 py-[var(--kraken-seccion-y)]"
+>
+  <header class="mb-12" data-revelar>
+    <p class="font-mono text-sm text-cian">
+      <span class="text-neon">$</span>
+      {t("about.eyebrow")}
+    </p>
+    <h2 id="about-titulo" class="mt-3 font-display text-4xl font-bold text-perla sm:text-5xl">
+      {t("about.title")}
+    </h2>
+  </header>
+
+  <div class="grid items-start gap-12 lg:grid-cols-[1.1fr_1fr]">
+    <!-- Columna izquierda: historia + datos -->
+    <div>
+      <div class="space-y-5 text-lg leading-relaxed text-bruma">
+        {
+          parrafos.map((p, i) => (
+            <p data-revelar data-retraso={i * 100}>
+              {p}
+            </p>
+          ))
+        }
+      </div>
+
+      <dl class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {
+          hechos.map((h, i) => (
+            <div
+              data-revelar
+              data-retraso={i * 120}
+              class="rounded-md border border-bruma/20 bg-abismo/40 p-4"
+            >
+              <dt class="font-display text-2xl font-bold text-cian">{h.valor}</dt>
+              <dd class="mt-1 text-sm text-bruma">{h.etiqueta}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <!-- Columna derecha: terminal -->
+    <div data-revelar data-retraso="150" class="lg:sticky lg:top-28">
+      <Terminal
+        lineas={terminal[lang]}
+        titulo={t("about.terminalTitle")}
+        descripcion={t("about.terminalDesc")}
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  import { iniciarTerminal } from "../../lib/terminal";
+
+  const terminal = document.querySelector<HTMLElement>("[data-terminal]");
+  if (terminal) iniciarTerminal(terminal);
+</script>

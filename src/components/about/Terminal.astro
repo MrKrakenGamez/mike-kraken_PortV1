@@ -1,0 +1,61 @@
+---
+import type { Linea } from "../../data/about";
+
+interface Props {
+  lineas: Linea[];
+  titulo: string;
+  descripcion: string;
+}
+
+const { lineas, titulo, descripcion } = Astro.props;
+
+// Color de texto según el tipo de línea
+const color = { cmd: "text-perla", out: "text-bruma", ok: "text-cian" } as const;
+---
+
+<figure
+  data-terminal
+  class="overflow-hidden rounded-md border border-cian/25 bg-abismo/80 shadow-glow-violeta backdrop-blur"
+>
+  <!-- Barra de título (decorativa) -->
+  <div
+    class="flex items-center gap-2 border-b border-cian/15 bg-marino/60 px-4 py-3"
+    aria-hidden="true"
+  >
+    <span class="h-3 w-3 rounded-full bg-neon"></span>
+    <span class="h-3 w-3 rounded-full bg-violeta"></span>
+    <span class="h-3 w-3 rounded-full bg-cian"></span>
+    <span class="ml-3 font-mono text-xs text-bruma">{titulo}</span>
+  </div>
+
+  <!-- Versión visual animada (oculta a lectores de pantalla) -->
+  <div
+    aria-hidden="true"
+    class="p-4 font-mono text-[0.8rem] leading-relaxed sm:p-5 sm:text-sm"
+  >
+    {
+      lineas.map((l) => (
+        <div
+          data-linea
+          data-tipo={l.tipo}
+          class="min-h-[1.6em] whitespace-pre-wrap break-words"
+        >
+          {l.tipo === "cmd" && <span class="mr-2 select-none text-neon">$</span>}
+          <span data-texto class={color[l.tipo]}>
+            {l.texto}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Versión accesible: el mismo contenido como texto simple -->
+  <figcaption class="sr-only">{descripcion}</figcaption>
+  <ul class="sr-only">
+    {
+      lineas
+        .filter((l) => l.texto)
+        .map((l) => <li>{l.tipo === "cmd" ? `$ ${l.texto}` : l.texto}</li>)
+    }
+  </ul>
+</figure>

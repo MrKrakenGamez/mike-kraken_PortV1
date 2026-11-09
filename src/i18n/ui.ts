@@ -40,6 +40,26 @@ export const ui = {
     "hero.ctaCv": "Descargar CV",
     "hero.ctaContact": "Contáctame",
     "hero.scroll": "Desliza para sumergirte",
+    "about.eyebrow": "cat sobre-mi.md",
+    "about.title": "Sobre mí",
+    // ✏️ PERSONALIZA: el párrafo p4 es un borrador. Cámbialo por algo tuyo
+    // (qué te mueve fuera del código, hobbies, cómo trabajas con equipos).
+    "about.p1":
+      "Soy Miguel Angel, y en la red me conocen como Mike Kraken. Tengo 27 años y me dedico a construir software que se mantiene en pie cuando importa.",
+    "about.p2":
+      "Llevo 5 años como desarrollador e ingeniero de software y hoy trabajo como líder técnico. Me muevo de punta a punta: backend en C#/.NET, interfaces en Angular y React, y la nube en Azure y AWS, con experiencia en fintech, salud y retail.",
+    "about.p3":
+      "En Inixio lideré la migración de un sistema legacy de Delphi a .NET 8. El resultado fue la base del nuevo estándar técnico de la empresa.",
+    "about.p4":
+      "El kraken es mi marca porque me gusta lo que vive en lo profundo: los sistemas que casi nadie ve, pero que sostienen todo lo demás.",
+    "about.fact1.value": "5 años",
+    "about.fact1.label": "como desarrollador e ingeniero de software",
+    "about.fact2.value": "3 industrias",
+    "about.fact2.label": "fintech, salud y retail",
+    "about.fact3.value": "ES · EN",
+    "about.fact3.label": "español e inglés",
+    "about.terminalTitle": "mike@kraken: ~",
+    "about.terminalDesc": "Resumen de perfil en formato de terminal.",
   },
   en: {
     "meta.description":
@@ -61,7 +81,7 @@ export const ui = {
     // "hero.tagline":
     //   "Full Stack Developer · DevOps · Tech Lead. Welcome to the depths.",
     // "hero.cta": "Dive in",
-        "hero.whoami": "quien soy",
+    "hero.whoami": "quien soy",
 
     "hero.eyebrow": "whoami",
     "hero.hello": "Hi, I'm",
@@ -73,6 +93,25 @@ export const ui = {
     "hero.ctaCv": "Download CV",
     "hero.ctaContact": "Get in touch",
     "hero.scroll": "Scroll to dive in",
+        "about.eyebrow": "cat about.md",
+    "about.title": "About me",
+    // ✏️ PERSONALIZE: p4 is a draft. Replace it with something of your own.
+    "about.p1":
+      "I'm Miguel Angel, known online as Mike Kraken. I'm 27 and I build software that holds up when it matters.",
+    "about.p2":
+      "I've spent 5 years as a software developer and engineer, and today I work as a tech lead. I work end to end: C#/.NET backends, Angular and React interfaces, and cloud on Azure and AWS, with experience in fintech, healthcare and retail.",
+    "about.p3":
+      "At Inixio I led the migration of a legacy Delphi system to .NET 8. The result became the foundation of the company's new technical standard.",
+    "about.p4":
+      "The kraken is my brand because I like what lives in the deep: the systems almost nobody sees, yet that hold everything else up.",
+    "about.fact1.value": "5 years",
+    "about.fact1.label": "as a software developer and engineer",
+    "about.fact2.value": "3 industries",
+    "about.fact2.label": "fintech, healthcare and retail",
+    "about.fact3.value": "ES · EN",
+    "about.fact3.label": "Spanish and English",
+    "about.terminalTitle": "mike@kraken: ~",
+    "about.terminalDesc": "Profile summary in terminal format.",
   },
   // ja: {
   //   "meta.description":
@@ -94,6 +133,8 @@ export const ui = {
   //   // "hero.tagline":
   //   //   "フルスタック開発者 · DevOps · テックリード。深淵へようこそ。",
   //   // "hero.cta": "飛び込む",
+  //   "hero.whoami": "quien soy",
+
   //   "hero.eyebrow": "whoami",
   //   "hero.hello": "こんにちは、私は",
   //   "hero.role1": "フルスタック開発者",

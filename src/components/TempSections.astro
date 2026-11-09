@@ -5,8 +5,13 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const t = useTranslations(getLangFromUrl(Astro.url));
 
+// const secciones = [
+//   { id: "about", label: t("nav.about") },
+//   { id: "experience", label: t("nav.experience") },
+//   { id: "projects", label: t("nav.projects") },
+//   { id: "contact", label: t("nav.contact") },
+// ];
 const secciones = [
-  { id: "about", label: t("nav.about") },
   { id: "experience", label: t("nav.experience") },
   { id: "projects", label: t("nav.projects") },
   { id: "contact", label: t("nav.contact") },

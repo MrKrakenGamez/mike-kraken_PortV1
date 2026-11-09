@@ -34,7 +34,7 @@ const { title, description = t("meta.description") } = Astro.props;
     <!-- Accesibilidad: aparece solo al enfocar con teclado -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-violeta focus:px-4 focus:py-2 focus:text-perla"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-60 focus:rounded-md focus:bg-violeta focus:px-4 focus:py-2 focus:text-perla"
     >
       {t("nav.skip")}
     </a>
@@ -44,5 +44,10 @@ const { title, description = t("meta.description") } = Astro.props;
       <slot />
     </main>
     <!-- <Footer lang={lang} /> -->
+         <!-- Activa el scroll reveal en cualquier elemento con data-revelar -->
+    <script>
+      import { activarRevelado } from "../lib/revelar";
+      activarRevelado();
+    </script>
   </body>
 </html>

@@ -2,6 +2,7 @@
 import HeroScene from "./HeroScene.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { site } from "../../data/site";
+import Hero3D from "./Hero3D";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -14,8 +15,15 @@ const roles = [t("hero.role1"), t("hero.role2"), t("hero.role3")];
   class="relative isolate flex min-h-[calc(100dvh-4rem)] items-center overflow-hidden"
 >
   <!-- Fondo: escena + velo para legibilidad del texto -->
+  <!-- <div class="escena absolute inset-0 -z-10" aria-hidden="true">
+    <HeroScene />
+    <div class="absolute inset-0 bg-linear-to-r from-abismo/75 via-abismo/40 to-transparent md:from-abismo/85 md:via-abismo/25">
+    </div>
+  </div> -->
   <div class="escena absolute inset-0 -z-10" aria-hidden="true">
     <HeroScene />
+    <!-- Isla React: monta el 3D solo si el equipo califica; si no, se ve el SVG -->
+    <Hero3D client:only="react" />
     <div
       class="absolute inset-0 bg-linear-to-r from-abismo/75 via-abismo/40 to-transparent md:from-abismo/85 md:via-abismo/25"
     >
@@ -27,7 +35,8 @@ const roles = [t("hero.role1"), t("hero.role2"), t("hero.role3")];
     <div class="max-w-2xl">
       <p class="aparece font-mono text-sm text-cian" style="--i:0">
         <span class="text-neon">$</span>
-        {t("hero.eyebrow")}<span class="cursor ml-1 inline-block h-4 w-2 translate-y-0.5 bg-cian"
+        {t("hero.eyebrow")}<span
+          class="cursor ml-1 inline-block h-4 w-2 translate-y-0.5 bg-cian"
         ></span>
       </p>
 
@@ -52,7 +61,10 @@ const roles = [t("hero.role1"), t("hero.role2"), t("hero.role3")];
         }
       </ul>
 
-      <p class="aparece mt-6 max-w-xl text-lg leading-relaxed text-bruma" style="--i:4">
+      <p
+        class="aparece mt-6 max-w-xl text-lg leading-relaxed text-bruma"
+        style="--i:4"
+      >
         {t("hero.tagline")}
       </p>
 
@@ -63,7 +75,16 @@ const roles = [t("hero.role1"), t("hero.role2"), t("hero.role3")];
           download
           class="inline-flex items-center gap-2 rounded-md bg-violeta px-6 py-3 font-display font-medium text-perla shadow-glow-violeta transition hover:shadow-glow-cian"
         >
-          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
             <path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"></path>
           </svg>
           {t("hero.ctaCv")}
@@ -146,6 +167,8 @@ const roles = [t("hero.role1"), t("hero.role2"), t("hero.role3")];
 
   /* Resplandor neón detrás del nombre */
   .titulo-glow {
-    filter: drop-shadow(0 0 22px color-mix(in srgb, var(--kraken-neon) 35%, transparent));
+    filter: drop-shadow(
+      0 0 22px color-mix(in srgb, var(--kraken-neon) 35%, transparent)
+    );
   }
 </style>

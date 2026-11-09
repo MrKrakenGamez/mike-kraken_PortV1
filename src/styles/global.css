@@ -54,3 +54,35 @@
     scroll-margin-top: 5rem;
   }
 }
+
+/* ---------- Scroll reveal (lo activa src/lib/revelar.ts) ---------- */
+@layer components {
+  .pre-revelado {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .pre-revelado.revelado {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Cursor de bloque de la terminal (lo crea src/lib/terminal.ts) */
+  .cursor-terminal {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background: var(--kraken-cian);
+    animation: parpadeo-terminal 1s steps(1) infinite;
+  }
+}
+
+@keyframes parpadeo-terminal {
+  50% {
+    opacity: 0;
+  }
+}
