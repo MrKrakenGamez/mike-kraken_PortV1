@@ -60,6 +60,14 @@ export const ui = {
     "about.fact3.label": "español e inglés",
     "about.terminalTitle": "mike@kraken: ~",
     "about.terminalDesc": "Resumen de perfil en formato de terminal.",
+    "exp.eyebrow": "git log --oneline",
+    "exp.title": "Experiencia",
+    "exp.subtitle":
+      "Mi recorrido profesional, del más reciente al más antiguo.",
+    "exp.current": "Actual",
+    "exp.list": "Línea de tiempo de experiencia profesional",
+    "exp.cvNote":
+      "Para el detalle completo de proyectos y clientes, descarga mi CV.",
   },
   en: {
     "meta.description":
@@ -93,7 +101,7 @@ export const ui = {
     "hero.ctaCv": "Download CV",
     "hero.ctaContact": "Get in touch",
     "hero.scroll": "Scroll to dive in",
-        "about.eyebrow": "cat about.md",
+    "about.eyebrow": "cat about.md",
     "about.title": "About me",
     // ✏️ PERSONALIZE: p4 is a draft. Replace it with something of your own.
     "about.p1":
@@ -112,6 +120,13 @@ export const ui = {
     "about.fact3.label": "Spanish and English",
     "about.terminalTitle": "mike@kraken: ~",
     "about.terminalDesc": "Profile summary in terminal format.",
+    "exp.eyebrow": "git log --oneline",
+    "exp.title": "Experience",
+    "exp.subtitle": "My professional path, most recent first.",
+    "exp.current": "Current",
+    "exp.list": "Professional experience timeline",
+    "exp.cvNote":
+      "For the full detail on projects and clients, download my CV.",
   },
   // ja: {
   //   "meta.description":

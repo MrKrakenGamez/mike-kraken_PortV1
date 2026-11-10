@@ -1,0 +1,70 @@
+---
+import TimelineItem from "./TimelineItem.astro";
+import { experiencia } from "../../data/experience";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { site } from "../../data/site";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const items = experiencia[lang];
+---
+
+<section
+  id="experience"
+  aria-labelledby="experience-titulo"
+  class="mx-auto max-w-5xl px-6 py-[var(--kraken-seccion-y)]"
+>
+  <header class="mb-14" data-revelar>
+    <p class="font-mono text-sm text-cian">
+      <span class="text-neon">$</span>
+      {t("exp.eyebrow")}
+    </p>
+    <h2 id="experience-titulo" class="mt-3 font-display text-4xl font-bold text-perla sm:text-5xl">
+      {t("exp.title")}
+    </h2>
+    <p class="mt-3 max-w-xl text-lg text-bruma">{t("exp.subtitle")}</p>
+  </header>
+
+  <div class="relative" data-timeline>
+    <!-- Línea base (tenue) -->
+    <div
+      aria-hidden="true"
+      class="absolute left-4 top-0 h-full w-px bg-bruma/20 md:left-1/2 md:-translate-x-1/2"
+    >
+    </div>
+    <!-- Línea de progreso (la altura la controla lineaProgreso.ts; sin JS queda completa) -->
+    <div
+      data-progreso
+      aria-hidden="true"
+      class="absolute left-4 top-0 h-full w-px bg-linear-to-b from-cian to-neon shadow-glow-cian md:left-1/2 md:-translate-x-1/2"
+    >
+    </div>
+
+    <ol aria-label={t("exp.list")} class="relative">
+      {
+        items.map((item, i) => (
+          <TimelineItem item={item} indice={i} etiquetaActual={t("exp.current")} />
+        ))
+      }
+    </ol>
+  </div>
+
+  <!-- Los nombres de clientes y proyectos solo aparecen en el CV -->
+  <div class="mt-14 flex flex-col items-start gap-4 sm:flex-row sm:items-center" data-revelar>
+    <p class="max-w-md text-bruma">{t("exp.cvNote")}</p>
+    <a
+      href={site.cv[lang]}
+      download
+      class="inline-flex items-center rounded-md border border-cian/50 px-6 py-3 font-display font-medium text-cian transition hover:bg-cian/10 hover:shadow-glow-cian"
+    >
+      {t("hero.ctaCv")}
+    </a>
+  </div>
+</section>
+
+<script>
+  import { iniciarLineaProgreso } from "../../lib/lineaProgreso";
+
+  const timeline = document.querySelector<HTMLElement>("[data-timeline]");
+  if (timeline) iniciarLineaProgreso(timeline);
+</script>

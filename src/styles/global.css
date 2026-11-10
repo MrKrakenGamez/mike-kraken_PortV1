@@ -79,6 +79,23 @@
     background: var(--kraken-cian);
     animation: parpadeo-terminal 1s steps(1) infinite;
   }
+    /* Nodos de la línea de tiempo: encendidos por defecto (sin JS se ven así) */
+  .nodo-linea {
+    background: var(--kraken-marino);
+    border-color: var(--kraken-cian);
+    box-shadow: var(--kraken-glow-cian);
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease,
+      background-color 0.4s ease;
+  }
+
+  /* Con JS activo, los nodos que la línea aún no alcanzó se ven apagados */
+  .con-progreso .nodo-linea:not(.alcanzado) {
+    background: var(--kraken-abismo);
+    border-color: color-mix(in srgb, var(--kraken-bruma) 50%, transparent);
+    box-shadow: none;
+  }
 }
 
 @keyframes parpadeo-terminal {
