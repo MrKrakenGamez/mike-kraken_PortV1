@@ -1,0 +1,46 @@
+---
+import PostCard from "./PostCard.astro";
+import { postsPorIdioma } from "../../lib/blog";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const recientes = (await postsPorIdioma(lang)).slice(0, 3);
+---
+
+{
+  recientes.length > 0 && (
+    <section
+      id="blog"
+      aria-labelledby="blog-preview-titulo"
+      class="mx-auto max-w-sitio px-6 py-[var(--kraken-seccion-y)]"
+    >
+      <header class="mb-10 flex flex-wrap items-end justify-between gap-4" data-revelar>
+        <div>
+          <p class="font-mono text-sm text-cian">
+            <span class="text-neon">$</span>
+            {t("blog.eyebrow")}
+          </p>
+          <h2
+            id="blog-preview-titulo"
+            class="mt-3 font-display text-4xl font-bold text-perla sm:text-5xl"
+          >
+            {t("blog.title")}
+          </h2>
+        </div>
+        <a
+          href={`/${lang}/blog/`}
+          class="font-display font-medium text-cian transition hover:text-neon"
+        >
+          {t("blog.all")} →
+        </a>
+      </header>
+
+      <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {recientes.map((p, i) => (
+          <PostCard post={p} lang={lang} indice={i} />
+        ))}
+      </ul>
+    </section>
+  )
+}

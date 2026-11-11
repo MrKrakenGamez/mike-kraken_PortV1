@@ -1,26 +1,24 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import tailwindcss from "@tailwindcss/vite";
-
 import react from "@astrojs/react";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  // i18n nativo: el sitio vive en /es/... y /en/...
   i18n: {
     defaultLocale: "es",
-    locales: ["es", "en"
-    //  ,"ja"
-    ],
+    locales: ["es", "en"],
     routing: {
-      prefixDefaultLocale: true, // también el español lleva prefijo: /es/
-      redirectToDefaultLocale: true, // "/" redirige automáticamente a /es/
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true,
     },
   },
-
+  integrations: [react()],
+  // Resaltado de sintaxis de los bloques de código del blog
+  markdown: {
+    shikiConfig: { theme: "night-owl" },
+  },
   vite: {
     plugins: [tailwindcss()],
   },
-
-  integrations: [react()],
 });

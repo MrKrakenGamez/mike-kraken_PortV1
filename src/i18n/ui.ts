@@ -73,6 +73,17 @@ export const ui = {
     "demo.title": "Demo interactivo",
     "demo.subtitle":
       "Un pipeline CI/CD simulado: elige la nube, rompe una prueba a propósito y mira cómo reacciona.",
+    "nav.blog": "Blog",
+    "blog.eyebrow": "ls blog/",
+    "blog.title": "Blog",
+    "blog.subtitle":
+      "Notas técnicas sobre desarrollo de software, arquitectura y DevOps.",
+    "blog.empty": "Todavía no hay artículos. Vuelve pronto.",
+    "blog.readMore": "Leer artículo",
+    "blog.minRead": "min de lectura",
+    "blog.back": "Volver al blog",
+    "blog.all": "Ver todos los artículos",
+    "blog.draft": "Borrador",
   },
   en: {
     "meta.description":
@@ -137,6 +148,17 @@ export const ui = {
     "demo.title": "Interactive demo",
     "demo.subtitle":
       "A simulated CI/CD pipeline: pick the cloud, break a test on purpose and watch how it reacts.",
+    "nav.blog": "Blog",
+    "blog.eyebrow": "ls blog/",
+    "blog.title": "Blog",
+    "blog.subtitle":
+      "Technical notes on software development, architecture and DevOps.",
+    "blog.empty": "No articles yet. Check back soon.",
+    "blog.readMore": "Read article",
+    "blog.minRead": "min read",
+    "blog.back": "Back to blog",
+    "blog.all": "View all articles",
+    "blog.draft": "Draft",
   },
   // ja: {
   //   "meta.description":

@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BlogPost from "../../../components/blog/BlogPost.astro";
+import { postsPorIdioma, slugDe } from "../../../lib/blog";
+
+export async function getStaticPaths() {
+  const posts = await postsPorIdioma("es");
+  const traducidos = new Set((await postsPorIdioma("en")).map((p) => slugDe(p.id)));
+  return posts.map((post) => ({
+    params: { slug: slugDe(post.id) },
+    props: { post, hayTraduccion: traducidos.has(slugDe(post.id)) },
+  }));
+}
+
+const { post, hayTraduccion } = Astro.props;
+const slug = Astro.params.slug;
+
+// Si no existe la traducción, el selector de idioma lleva al índice del blog (no a un 404)
+const alternate = {
+  es: `/es/blog/${slug}/`,
+  en: hayTraduccion ? `/en/blog/${slug}/` : "/en/blog/",
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} | Mike Kraken`}
+  description={post.data.description}
+  alternate={alternate}
+>
+  <BlogPost post={post} />
+</BaseLayout>

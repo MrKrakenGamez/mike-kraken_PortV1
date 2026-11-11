@@ -1,0 +1,82 @@
+---
+import { render } from "astro:content";
+import { formatearFecha, minutosLectura, type Entrada } from "../../lib/blog";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+interface Props {
+  post: Entrada;
+}
+
+const { post } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { data } = post;
+const { Content } = await render(post);
+---
+
+<article class="mx-auto max-w-3xl px-6 pb-[var(--kraken-seccion-y)] pt-16 sm:pt-24">
+  <a
+    href={`/${lang}/blog/`}
+    class="inline-flex items-center gap-2 font-mono text-sm text-bruma transition hover:text-cian"
+  >
+    <span aria-hidden="true">←</span>
+    {t("blog.back")}
+  </a>
+
+  <header class="mt-10" data-revelar>
+    <p class="font-mono text-sm text-cian">
+      <time datetime={data.pubDate.toISOString()}>{formatearFecha(data.pubDate, lang)}</time>
+      · {minutosLectura(post.body)}
+      {t("blog.minRead")}
+      {
+        data.draft && (
+          <span class="ml-2 rounded-full border border-bruma/40 px-2 py-0.5 text-[0.65rem] uppercase tracking-wider text-bruma">
+            {t("blog.draft")}
+          </span>
+        )
+      }
+    </p>
+    <h1
+      class="mt-3 bg-linear-to-r from-cian to-neon bg-clip-text font-display text-4xl font-bold leading-tight text-transparent sm:text-5xl"
+    >
+      {data.title}
+    </h1>
+    <p class="mt-4 text-lg leading-relaxed text-bruma">{data.description}</p>
+    {
+      data.tags.length > 0 && (
+        <ul class="mt-5 flex flex-wrap gap-2">
+          {data.tags.map((tag) => (
+            <li class="rounded-full border border-neon/40 bg-neon/10 px-3 py-1 font-mono text-xs text-perla">
+              {tag}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </header>
+
+  {
+    data.cover && (
+      <img
+        src={data.cover}
+        alt={data.coverAlt ?? ""}
+        class="mt-8 w-full rounded-md border border-bruma/20"
+      />
+    )
+  }
+
+  <!-- Estilos de lectura: .prosa (definidos en global.css) -->
+  <div class="prosa mt-10">
+    <Content />
+  </div>
+
+  <footer class="mt-14 border-t border-bruma/20 pt-6">
+    <a
+      href={`/${lang}/blog/`}
+      class="inline-flex items-center gap-2 font-display font-medium text-cian transition hover:text-neon"
+    >
+      <span aria-hidden="true">←</span>
+      {t("blog.back")}
+    </a>
+  </footer>
+</article>

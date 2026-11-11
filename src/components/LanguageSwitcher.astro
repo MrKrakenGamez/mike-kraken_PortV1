@@ -4,15 +4,16 @@ import { switchLangPath, useTranslations } from "../i18n/utils";
 
 interface Props {
   lang: Lang;
+  // Ruta equivalente por idioma, cuando no basta con cambiar el prefijo (p. ej. un artículo sin traducción)
+  alternate?: Partial<Record<Lang, string>>;
 }
 
-const { lang } = Astro.props;
+const { lang, alternate } = Astro.props;
 const t = useTranslations(lang);
 
-// Un enlace por idioma, apuntando a la misma página en el otro idioma
 const items = (Object.keys(languages) as Lang[]).map((code) => ({
   code,
-  href: switchLangPath(Astro.url.pathname, code),
+  href: alternate?.[code] ?? switchLangPath(Astro.url.pathname, code),
   active: code === lang,
 }));
 ---

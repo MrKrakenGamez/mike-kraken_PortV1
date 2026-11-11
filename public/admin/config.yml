@@ -1,0 +1,48 @@
+# Configuración de Decap CMS
+backend:
+  name: github
+  repo: TU_USUARIO/TU_REPOSITORIO # TODO: tu repositorio real de GitHub (usuario/repo)
+  branch: main
+
+# En localhost, el CMS edita tus archivos directamente (sin login).
+# Requiere ejecutar en otra terminal: npx decap-server
+local_backend: true
+
+media_folder: "public/uploads/blog"
+public_folder: "/uploads/blog"
+locale: "es"
+
+collections:
+  - name: blog_es
+    label: "Blog · Español"
+    label_singular: "Artículo"
+    folder: "src/content/blog/es"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    # El nombre del archivo sale del campo "urlSlug": usa el MISMO en ES y EN para enlazar traducciones
+    slug: "{{fields.urlSlug}}"
+    summary: "{{title}} · {{pubDate}}"
+    sortable_fields: ["pubDate", "title"]
+    fields: &campos_blog
+      - { label: "Slug (URL)", name: "urlSlug", widget: "string", hint: "Minúsculas y guiones, igual en ES y EN. Ej: mi-primer-articulo" }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text", hint: "1–2 frases: se usa en la tarjeta y en buscadores." }
+      - { label: "Fecha de publicación", name: "pubDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "Etiquetas", name: "tags", widget: "list", default: [], required: false }
+      - { label: "Borrador", name: "draft", widget: "boolean", default: false, hint: "Los borradores no se publican." }
+      - { label: "Imagen de portada", name: "cover", widget: "image", required: false }
+      - { label: "Texto alternativo de la portada", name: "coverAlt", widget: "string", required: false }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: blog_en
+    label: "Blog · English"
+    label_singular: "Article"
+    folder: "src/content/blog/en"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{fields.urlSlug}}"
+    summary: "{{title}} · {{pubDate}}"
+    sortable_fields: ["pubDate", "title"]
+    fields: *campos_blog

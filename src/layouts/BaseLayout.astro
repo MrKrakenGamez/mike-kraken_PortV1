@@ -8,16 +8,18 @@ import "@fontsource-variable/jetbrains-mono";
 import Nav from "../components/Nav.astro";
 // import Footer from "../components/Footer.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import type { Lang } from "../i18n/ui";
 
 interface Props {
   title: string;
   description?: string;
+  // Ruta equivalente por idioma (para páginas cuya traducción no vive en la misma URL)
+  alternate?: Partial<Record<Lang, string>>;
 }
 
-// El idioma se deduce de la URL (/es/... o /en/...)
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { title, description = t("meta.description") } = Astro.props;
+const { title, description = t("meta.description"), alternate } = Astro.props;
 ---
 
 <!doctype html>
@@ -31,23 +33,25 @@ const { title, description = t("meta.description") } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="flex min-h-dvh flex-col">
-    <!-- Accesibilidad: aparece solo al enfocar con teclado -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-60 focus:rounded-md focus:bg-violeta focus:px-4 focus:py-2 focus:text-perla"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-violeta focus:px-4 focus:py-2 focus:text-perla"
     >
       {t("nav.skip")}
     </a>
 
-    <Nav lang={lang} />
+    <Nav lang={lang} alternate={alternate} />
     <main id="main-content" class="flex-1">
       <slot />
     </main>
     <!-- <Footer lang={lang} /> -->
-         <!-- Activa el scroll reveal en cualquier elemento con data-revelar -->
+
+    <!-- Efectos globales: scroll reveal (data-revelar) y tilt 3D (data-tilt) -->
     <script>
       import { activarRevelado } from "../lib/revelar";
+      import { activarTilt } from "../lib/tilt";
       activarRevelado();
+      activarTilt();
     </script>
   </body>
 </html>

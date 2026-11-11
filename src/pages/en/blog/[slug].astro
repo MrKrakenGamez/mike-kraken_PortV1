@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BlogPost from "../../../components/blog/BlogPost.astro";
+import { postsPorIdioma, slugDe } from "../../../lib/blog";
+
+export async function getStaticPaths() {
+  const posts = await postsPorIdioma("en");
+  const traducidos = new Set((await postsPorIdioma("es")).map((p) => slugDe(p.id)));
+  return posts.map((post) => ({
+    params: { slug: slugDe(post.id) },
+    props: { post, hayTraduccion: traducidos.has(slugDe(post.id)) },
+  }));
+}
+
+const { post, hayTraduccion } = Astro.props;
+const slug = Astro.params.slug;
+
+const alternate = {
+  en: `/en/blog/${slug}/`,
+  es: hayTraduccion ? `/es/blog/${slug}/` : "/es/blog/",
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} | Mike Kraken`}
+  description={post.data.description}
+  alternate={alternate}
+>
+  <BlogPost post={post} />
+</BaseLayout>

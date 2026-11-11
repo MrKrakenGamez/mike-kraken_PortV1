@@ -96,6 +96,92 @@
     border-color: color-mix(in srgb, var(--kraken-bruma) 50%, transparent);
     box-shadow: none;
   }
+    /* Estilos de lectura para el contenido Markdown de los artículos */
+  .prosa {
+    color: var(--kraken-bruma);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+  .prosa > * + * {
+    margin-top: 1.25em;
+  }
+  .prosa h2,
+  .prosa h3 {
+    margin-top: 2em;
+    font-family: var(--kraken-font-display);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--kraken-perla);
+  }
+  .prosa h2 {
+    font-size: 1.75rem;
+  }
+  .prosa h3 {
+    font-size: 1.35rem;
+  }
+  .prosa strong {
+    color: var(--kraken-perla);
+  }
+  .prosa a {
+    color: var(--kraken-cian);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prosa a:hover {
+    color: var(--kraken-neon);
+  }
+  .prosa ul,
+  .prosa ol {
+    padding-left: 1.4em;
+  }
+  .prosa ul {
+    list-style: disc;
+  }
+  .prosa ol {
+    list-style: decimal;
+  }
+  .prosa li + li {
+    margin-top: 0.4em;
+  }
+  .prosa li::marker {
+    color: var(--kraken-cian);
+  }
+  .prosa blockquote {
+    border-left: 3px solid var(--kraken-violeta);
+    padding-left: 1em;
+    font-style: italic;
+    color: var(--kraken-perla);
+  }
+  .prosa code {
+    padding: 0.15em 0.4em;
+    border-radius: 0.35rem;
+    font-family: var(--kraken-font-mono);
+    font-size: 0.9em;
+    color: var(--kraken-perla);
+    background: color-mix(in srgb, var(--kraken-violeta) 18%, transparent);
+  }
+  .prosa pre {
+    overflow-x: auto;
+    padding: 1rem 1.25rem;
+    border-radius: var(--kraken-radio-md);
+    border: 1px solid color-mix(in srgb, var(--kraken-cian) 20%, transparent);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .prosa pre code {
+    padding: 0;
+    background: none;
+    color: inherit;
+  }
+  .prosa img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--kraken-radio-md);
+  }
+  .prosa hr {
+    margin: 2.5em 0;
+    border-color: color-mix(in srgb, var(--kraken-bruma) 25%, transparent);
+  }
 }
 
 @keyframes parpadeo-terminal {

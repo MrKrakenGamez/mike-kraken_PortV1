@@ -5,19 +5,21 @@ import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 interface Props {
   lang: Lang;
+  alternate?: Partial<Record<Lang, string>>;
 }
 
-const { lang } = Astro.props;
+const { lang, alternate } = Astro.props;
 const t = useTranslations(lang);
 
-// Los ids son neutros (iguales en ES y EN) y apuntan a secciones de la home
+const base = `/${lang}/`;
 const links = [
-  { id: "about", label: t("nav.about") },
-  { id: "experience", label: t("nav.experience") },
-  { id: "projects", label: t("nav.projects") },
-  { id: "demo", label: t("nav.demo") },
-  { id: "contact", label: t("nav.contact") },
-].map((l) => ({ ...l, href: `/${lang}/#${l.id}` }));
+  { label: t("nav.about"), href: `${base}#about` },
+  { label: t("nav.experience"), href: `${base}#experience` },
+  { label: t("nav.projects"), href: `${base}#projects` },
+  { label: t("nav.demo"), href: `${base}#demo` },
+  { label: t("nav.blog"), href: `${base}blog/` },
+  { label: t("nav.contact"), href: `${base}#contact` },
+];
 ---
 
 <header
@@ -26,7 +28,7 @@ const links = [
   <div class="mx-auto flex h-16 max-w-sitio items-center justify-between gap-4 px-6">
     <!-- Logo provisional (se reemplazará por el kraken definitivo) -->
     <a
-      href={`/${lang}/`}
+      href={base}
       aria-label={t("nav.home")}
       class="flex items-center gap-2 font-display text-lg font-bold text-perla"
     >
@@ -47,7 +49,7 @@ const links = [
     </a>
 
     <!-- Navegación de escritorio -->
-    <nav aria-label={t("nav.main")} class="hidden md:block">
+    <nav aria-label={t("nav.main")} class="hidden lg:block">
       <ul class="flex items-center gap-8 text-sm">
         {
           links.map((l) => (
@@ -61,9 +63,9 @@ const links = [
       </ul>
     </nav>
 
-    <!-- Selector de idioma + botón hamburguesa (móvil) -->
+    <!-- Selector de idioma + botón hamburguesa (móvil y tablet) -->
     <div class="flex items-center gap-3">
-      <LanguageSwitcher lang={lang} />
+      <LanguageSwitcher lang={lang} alternate={alternate} />
       <button
         id="menu-toggle"
         type="button"
@@ -72,9 +74,8 @@ const links = [
         aria-label={t("nav.menuOpen")}
         data-label-open={t("nav.menuOpen")}
         data-label-close={t("nav.menuClose")}
-        class="group inline-flex h-10 w-10 items-center justify-center rounded-md border border-bruma/30 text-perla transition hover:text-cian md:hidden"
+        class="group inline-flex h-10 w-10 items-center justify-center rounded-md border border-bruma/30 text-perla transition hover:text-cian lg:hidden"
       >
-        <!-- Ícono hamburguesa / ícono cerrar según aria-expanded -->
         <svg viewBox="0 0 24 24" class="h-5 w-5 group-aria-expanded:hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <path d="M4 7h16M4 12h16M4 17h16"></path>
         </svg>
@@ -90,7 +91,7 @@ const links = [
     id="mobile-menu"
     hidden
     aria-label={t("nav.main")}
-    class="border-t border-bruma/15 bg-abismo/95 md:hidden"
+    class="border-t border-bruma/15 bg-abismo/95 lg:hidden"
   >
     <ul class="flex flex-col px-6 py-4">
       {
