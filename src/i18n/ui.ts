@@ -68,6 +68,11 @@ export const ui = {
     "exp.list": "Línea de tiempo de experiencia profesional",
     "exp.cvNote":
       "Para el detalle completo de proyectos y clientes, descarga mi CV.",
+    "nav.demo": "Demo",
+    "demo.eyebrow": "./demo.sh",
+    "demo.title": "Demo interactivo",
+    "demo.subtitle":
+      "Un pipeline CI/CD simulado: elige la nube, rompe una prueba a propósito y mira cómo reacciona.",
   },
   en: {
     "meta.description":
@@ -127,6 +132,11 @@ export const ui = {
     "exp.list": "Professional experience timeline",
     "exp.cvNote":
       "For the full detail on projects and clients, download my CV.",
+    "nav.demo": "Demo",
+    "demo.eyebrow": "./demo.sh",
+    "demo.title": "Interactive demo",
+    "demo.subtitle":
+      "A simulated CI/CD pipeline: pick the cloud, break a test on purpose and watch how it reacts.",
   },
   // ja: {
   //   "meta.description":
