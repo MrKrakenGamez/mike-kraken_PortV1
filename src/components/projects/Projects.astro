@@ -1,0 +1,30 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import { listaProyectos } from "../../data/projects";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const lista = listaProyectos(lang);
+---
+
+<section
+  id="projects"
+  aria-labelledby="projects-titulo"
+  class="mx-auto max-w-sitio px-6 py-[var(--kraken-seccion-y)]"
+>
+  <header class="mb-12" data-revelar>
+    <p class="font-mono text-sm text-cian">
+      <span class="text-neon">$</span>
+      {t("proj.eyebrow")}
+    </p>
+    <h2 id="projects-titulo" class="mt-3 font-display text-4xl font-bold text-perla sm:text-5xl">
+      {t("proj.title")}
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg text-bruma">{t("proj.subtitle")}</p>
+  </header>
+
+  <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {lista.map((p, i) => <ProjectCard proyecto={p} lang={lang} indice={i} />)}
+  </ul>
+</section>

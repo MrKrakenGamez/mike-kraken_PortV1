@@ -17,4 +17,24 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+// Colección "testimonios": un archivo por persona, con cita en español y/o inglés
+const testimonios = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/testimonios" }),
+  schema: z
+    .object({
+      nombre: z.string(),
+      cargo: z.string(), // cargo o relación (p. ej. "Líder de proyecto")
+      organizacion: z.string().optional(), // puede ser genérica: "Cliente del sector salud"
+      enlace: z.string().url().optional(), // LinkedIn de la persona (opcional)
+      foto: z.string().optional(),
+      orden: z.number().default(1),
+      draft: z.boolean().default(true), // por seguridad, nace como borrador
+      cita_es: z.string().optional(),
+      cita_en: z.string().optional(),
+    })
+    .refine((d) => d.cita_es || d.cita_en, {
+      message: "Falta al menos una cita (cita_es o cita_en).",
+    }),
+});
+
+export const collections = { blog, testimonios };

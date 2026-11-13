@@ -1,0 +1,95 @@
+---
+import type { Proyecto } from "../../data/projects";
+import type { Lang } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
+
+interface Props {
+  proyecto: Proyecto;
+  lang: Lang;
+  indice: number;
+}
+
+const { proyecto: p, lang, indice } = Astro.props;
+const t = useTranslations(lang);
+
+// Solo el caso de estudio (página interna) y los repos (externo) son enlaces
+const href = p.tipo === "caso" ? `/${lang}/projects/${p.slug}/` : p.tipo === "repos" ? p.href : undefined;
+const externo = p.tipo === "repos";
+const Etiqueta = href ? "a" : "article";
+const atributos = href
+  ? { href, ...(externo ? { target: "_blank", rel: "noopener noreferrer" } : {}) }
+  : {};
+
+const ancho =
+  p.tipo === "caso"
+    ? "md:col-span-2"
+    : p.tipo === "repos"
+      ? "md:col-span-2 lg:col-span-3"
+      : "";
+const etiquetaTipo = {
+  caso: t("proj.tag.caso"),
+  cliente: t("proj.tag.cliente"),
+  repos: t("proj.tag.repos"),
+}[p.tipo];
+const cta = p.tipo === "caso" ? t("proj.viewCase") : p.tipo === "repos" ? t("proj.repos") : null;
+---
+
+<li data-revelar data-retraso={Math.min(indice, 4) * 70} class:list={["flex", ancho]}>
+  <Etiqueta
+    data-tilt
+    class:list={[
+      "group relative flex w-full flex-col rounded-md border bg-abismo/50 p-6 backdrop-blur",
+      p.tipo === "caso" ? "border-cian/40 shadow-glow-cian md:p-8" : "border-bruma/20",
+      href && "transition hover:border-cian/60",
+    ]}
+    {...atributos}
+  >
+    <div class="flex items-center justify-between gap-3">
+      <span class="font-mono text-xs text-cian">{etiquetaTipo}</span>
+      {
+        p.confidencial && (
+          <span class="inline-flex items-center gap-1 rounded-full border border-bruma/30 px-2 py-0.5 font-mono text-[0.65rem] uppercase tracking-wider text-bruma">
+            <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="5" y="11" width="14" height="9" rx="2" />
+              <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+            </svg>
+            {t("proj.confidential")}
+          </span>
+        )
+      }
+    </div>
+
+    <h3
+      class:list={[
+        "mt-4 font-display font-bold text-perla",
+        p.tipo === "caso" ? "text-3xl" : "text-2xl",
+      ]}
+    >
+      {p.titulo}
+    </h3>
+    {p.cliente && <p class="mt-1 font-mono text-xs text-bruma">{p.cliente}</p>}
+
+    <p class="mt-4 leading-relaxed text-bruma">{p.descripcion}</p>
+
+    <ul class="mt-5 flex flex-wrap gap-2">
+      {
+        p.etiquetas.map((e) => (
+          <li class="rounded-full border border-neon/40 bg-neon/10 px-3 py-1 font-mono text-xs text-perla">
+            {e}
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      cta && (
+        <span class="mt-6 inline-flex items-center gap-2 font-display font-medium text-cian">
+          {cta}
+          <span aria-hidden="true" class="transition group-hover:translate-x-1">
+            →
+          </span>
+        </span>
+      )
+    }
+  </Etiqueta>
+</li>

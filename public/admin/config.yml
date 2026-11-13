@@ -34,6 +34,27 @@ collections:
       - { label: "Imagen de portada", name: "cover", widget: "image", required: false }
       - { label: "Texto alternativo de la portada", name: "coverAlt", widget: "string", required: false }
       - { label: "Contenido", name: "body", widget: "markdown" }
+        - name: testimonios
+    label: "Testimonios"
+    label_singular: "Testimonio"
+    folder: "src/content/testimonios"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    summary: "{{nombre}} · {{cargo}}"
+    media_folder: "public/uploads/testimonios"
+    public_folder: "/uploads/testimonios"
+    fields:
+      - { label: "Nombre", name: "nombre", widget: "string" }
+      - { label: "Cargo o relación", name: "cargo", widget: "string", hint: "Ej: Líder de proyecto, Product Owner, colega de equipo." }
+      - { label: "Organización", name: "organizacion", widget: "string", required: false, hint: "Si no tienes permiso para nombrar la empresa, usa una descripción genérica (ej: «Cliente del sector salud»)." }
+      - { label: "Perfil de LinkedIn (opcional)", name: "enlace", widget: "string", required: false }
+      - { label: "Foto (opcional)", name: "foto", widget: "image", required: false }
+      - { label: "Orden", name: "orden", widget: "number", value_type: "int", default: 1 }
+      - { label: "Borrador", name: "draft", widget: "boolean", default: true, hint: "Desmárcalo solo cuando la persona haya autorizado publicar su recomendación." }
+      - { label: "Cita en español", name: "cita_es", widget: "text", required: false }
+      - { label: "Cita en inglés", name: "cita_en", widget: "text", required: false, hint: "Debe haber al menos una de las dos citas." }
 
   - name: blog_en
     label: "Blog · English"

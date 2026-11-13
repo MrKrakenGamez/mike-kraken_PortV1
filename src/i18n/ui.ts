@@ -11,7 +11,7 @@ export const defaultLang: Lang = "es";
 export const ui = {
   es: {
     "meta.description":
-      "Portafolio de Mike Kraken — Full Stack Developer, DevOps y Líder Técnico.",
+      "Portafolio de Mike G — Full Stack Developer, DevOps y Líder Técnico.",
     "nav.main": "Navegación principal",
     "nav.skip": "Saltar al contenido",
     "nav.about": "Sobre mí",
@@ -20,7 +20,7 @@ export const ui = {
     "nav.contact": "Contacto",
     "nav.menuOpen": "Abrir menú",
     "nav.menuClose": "Cerrar menú",
-    "nav.home": "Mike Kraken — ir al inicio",
+    "nav.home": "Mgamez — ir al inicio",
     "lang.label": "Cambiar idioma",
     "footer.tagline": "Forjado en las profundidades del código.",
     "footer.social": "Redes y contacto",
@@ -45,7 +45,7 @@ export const ui = {
     // ✏️ PERSONALIZA: el párrafo p4 es un borrador. Cámbialo por algo tuyo
     // (qué te mueve fuera del código, hobbies, cómo trabajas con equipos).
     "about.p1":
-      "Soy Miguel Angel, y en la red me conocen como Mike Kraken. Tengo 27 años y me dedico a construir software que se mantiene en pie cuando importa.",
+      "Soy Miguel Angel. Tengo 27 años y me dedico a construir software que se mantiene en pie cuando importa.",
     "about.p2":
       "Llevo 5 años como desarrollador e ingeniero de software y hoy trabajo como líder técnico. Me muevo de punta a punta: backend en C#/.NET, interfaces en Angular y React, y la nube en Azure y AWS, con experiencia en fintech, salud y retail.",
     "about.p3":
@@ -84,10 +84,57 @@ export const ui = {
     "blog.back": "Volver al blog",
     "blog.all": "Ver todos los artículos",
     "blog.draft": "Borrador",
+    "testi.eyebrow": "cat recomendaciones.txt",
+    "testi.title": "Recomendaciones",
+    "testi.subtitle": "Lo que dicen las personas con las que he trabajado.",
+    "testi.draft": "Borrador",
+    "contact.eyebrow": "./contacto.sh",
+    "contact.title": "Contacto",
+    "contact.intro":
+      "¿Tienes una oportunidad laboral, un proyecto freelance o una consultoría en mente? Escríbeme y te respondo.",
+    "contact.channels": "Canales directos",
+    "contact.cvTitle": "Mi CV",
+    "contact.cvDesc":
+      "PDF con el detalle completo de experiencia, proyectos y clientes.",
+    "contact.formTitle": "Envíame un mensaje",
+    "contact.name": "Nombre",
+    "contact.email": "Correo electrónico",
+    "contact.reason": "Motivo",
+    "contact.reason.job": "Oportunidad laboral",
+    "contact.reason.freelance": "Proyecto freelance o consultoría",
+    "contact.reason.other": "Otro",
+    "contact.message": "Mensaje",
+    "contact.send": "Enviar mensaje",
+    "contact.sending": "Enviando…",
+    "contact.ok": "¡Mensaje enviado! Te responderé pronto.",
+    "contact.error":
+      "No se pudo enviar el mensaje. Puedes escribirme directamente a:",
+    "contact.dev":
+      "Modo desarrollo: el formulario solo envía una vez desplegado. Los datos se mostraron en la consola.",
+    "contact.privacy": "Usaré estos datos únicamente para responderte.",
+    "contact.honeypot": "No llenes este campo si eres una persona:",
+        "proj.eyebrow": "ls proyectos/",
+    "proj.title": "Proyectos",
+    "proj.subtitle":
+      "Casos de estudio y trabajo para clientes. Por confidencialidad, los clientes se describen de forma genérica.",
+    "proj.tag.caso": "caso de estudio",
+    "proj.tag.cliente": "proyecto de cliente",
+    "proj.tag.repos": "github",
+    "proj.viewCase": "Ver caso de estudio",
+    "proj.confidential": "Confidencial",
+    "proj.repos": "Ver en GitHub",
+    "proj.back": "Volver a proyectos",
+    "case.problem": "Problema",
+    "case.role": "Rol",
+    "case.decision": "Decisión",
+    "case.result": "Resultado",
+    "case.stack": "Stack",
+    "case.ctaTitle": "¿Tienes un reto similar?",
+    "case.ctaButton": "Hablemos",
   },
   en: {
     "meta.description":
-      "Mike Kraken's portfolio — Full Stack Developer, DevOps and Tech Lead.",
+      "Mike's portfolio — Full Stack Developer, DevOps and Tech Lead.",
     "nav.main": "Main navigation",
     "nav.skip": "Skip to content",
     "nav.about": "About",
@@ -96,7 +143,7 @@ export const ui = {
     "nav.contact": "Contact",
     "nav.menuOpen": "Open menu",
     "nav.menuClose": "Close menu",
-    "nav.home": "Mike Kraken — go to home",
+    "nav.home": "Mike — go to home",
     "lang.label": "Change language",
     "footer.tagline": "Forged in the depths of code.",
     "footer.social": "Social links and contact",
@@ -121,7 +168,7 @@ export const ui = {
     "about.title": "About me",
     // ✏️ PERSONALIZE: p4 is a draft. Replace it with something of your own.
     "about.p1":
-      "I'm Miguel Angel, known online as Mike Kraken. I'm 27 and I build software that holds up when it matters.",
+      "I'm Miguel Angel. I'm 27 and I build software that holds up when it matters.",
     "about.p2":
       "I've spent 5 years as a software developer and engineer, and today I work as a tech lead. I work end to end: C#/.NET backends, Angular and React interfaces, and cloud on Azure and AWS, with experience in fintech, healthcare and retail.",
     "about.p3":
@@ -159,6 +206,53 @@ export const ui = {
     "blog.back": "Back to blog",
     "blog.all": "View all articles",
     "blog.draft": "Draft",
+    "testi.eyebrow": "cat recommendations.txt",
+    "testi.title": "Recommendations",
+    "testi.subtitle": "What people I've worked with say.",
+    "testi.draft": "Draft",
+    "contact.eyebrow": "./contact.sh",
+    "contact.title": "Contact",
+    "contact.intro":
+      "Have a job opportunity, a freelance project or a consulting engagement in mind? Write to me and I'll get back to you.",
+    "contact.channels": "Direct channels",
+    "contact.cvTitle": "My CV",
+    "contact.cvDesc":
+      "A PDF with the full detail of experience, projects and clients.",
+    "contact.formTitle": "Send me a message",
+    "contact.name": "Name",
+    "contact.email": "Email address",
+    "contact.reason": "Reason",
+    "contact.reason.job": "Job opportunity",
+    "contact.reason.freelance": "Freelance or consulting project",
+    "contact.reason.other": "Other",
+    "contact.message": "Message",
+    "contact.send": "Send message",
+    "contact.sending": "Sending…",
+    "contact.ok": "Message sent! I'll reply soon.",
+    "contact.error":
+      "The message could not be sent. You can write to me directly at:",
+    "contact.dev":
+      "Development mode: the form only sends once deployed. The data was printed to the console.",
+    "contact.privacy": "I'll only use this information to reply to you.",
+    "contact.honeypot": "Don't fill in this field if you're a person:",
+        "proj.eyebrow": "ls projects/",
+    "proj.title": "Projects",
+    "proj.subtitle":
+      "Case studies and client work. For confidentiality, clients are described generically.",
+    "proj.tag.caso": "case study",
+    "proj.tag.cliente": "client project",
+    "proj.tag.repos": "github",
+    "proj.viewCase": "View case study",
+    "proj.confidential": "Confidential",
+    "proj.repos": "View on GitHub",
+    "proj.back": "Back to projects",
+    "case.problem": "Problem",
+    "case.role": "Role",
+    "case.decision": "Decision",
+    "case.result": "Result",
+    "case.stack": "Stack",
+    "case.ctaTitle": "Facing a similar challenge?",
+    "case.ctaButton": "Let's talk",
   },
   // ja: {
   //   "meta.description":

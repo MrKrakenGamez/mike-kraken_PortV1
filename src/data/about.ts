@@ -9,7 +9,7 @@ export interface Linea {
 export const terminal: Record<Lang, Linea[]> = {
   es: [
     { tipo: "cmd", texto: "whoami" },
-    { tipo: "out", texto: "Miguel Angel Gamez Guadarrama (alias Mike Kraken)" },
+    { tipo: "out", texto: "Miguel Angel Gamez Guadarrama" },
     { tipo: "cmd", texto: "cat rol.txt" },
     { tipo: "out", texto: "Full Stack Developer · DevOps · Líder Técnico" },
     { tipo: "cmd", texto: "cat stack.json" },
@@ -28,7 +28,7 @@ export const terminal: Record<Lang, Linea[]> = {
   ],
   en: [
     { tipo: "cmd", texto: "whoami" },
-    { tipo: "out", texto: "Miguel Angel Gamez Guadarrama (aka Mike Kraken)" },
+    { tipo: "out", texto: "Miguel Angel Gamez Guadarrama" },
     { tipo: "cmd", texto: "cat role.txt" },
     { tipo: "out", texto: "Full Stack Developer · DevOps · Tech Lead" },
     { tipo: "cmd", texto: "cat stack.json" },

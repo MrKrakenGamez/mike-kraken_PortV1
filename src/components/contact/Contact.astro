@@ -1,0 +1,90 @@
+---
+import ContactForm from "./ContactForm.astro";
+import { site } from "../../data/site";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Muestra la URL sin "https://www."
+const limpio = (url: string) => url.replace(/^https?:\/\/(www\.)?/, "");
+
+const canales = [
+  { nombre: "Email", valor: site.email, href: `mailto:${site.email}`, externo: false },
+//   { nombre: "LinkedIn", valor: limpio(site.social.linkedin), href: site.social.linkedin, externo: true },
+  { nombre: "GitHub", valor: limpio(site.social.github), href: site.social.github, externo: true },
+//   { nombre: "Instagram", valor: limpio(site.social.instagram), href: site.social.instagram, externo: true },
+];
+---
+
+<section
+  id="contact"
+  aria-labelledby="contact-titulo"
+  class="mx-auto max-w-sitio px-6 py-[var(--kraken-seccion-y)]"
+>
+  <header class="mb-12" data-revelar>
+    <p class="font-mono text-sm text-cian">
+      <span class="text-neon">$</span>
+      {t("contact.eyebrow")}
+    </p>
+    <h2 id="contact-titulo" class="mt-3 font-display text-4xl font-bold text-perla sm:text-5xl">
+      {t("contact.title")}
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg text-bruma">{t("contact.intro")}</p>
+  </header>
+
+  <div class="grid items-start gap-12 lg:grid-cols-2">
+    <!-- Canales directos + CV -->
+    <div data-revelar>
+      <h3 class="font-display text-xl font-bold text-perla">{t("contact.channels")}</h3>
+
+      <ul class="mt-4 space-y-3">
+        {
+          canales.map((c) => (
+            <li>
+              <a
+                href={c.href}
+                class="group flex items-center justify-between gap-4 rounded-md border border-bruma/20 bg-abismo/50 p-4 transition hover:border-cian/60 hover:shadow-glow-cian"
+                {...(c.externo ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                <span>
+                  <span class="block font-mono text-xs text-cian">{c.nombre}</span>
+                  <span class="block break-all text-perla">{c.valor}</span>
+                </span>
+                <span aria-hidden="true" class="text-cian transition group-hover:translate-x-1">
+                  {c.externo ? "↗" : "→"}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Descarga del CV -->
+      <div class="mt-6 rounded-md border border-neon/40 bg-neon/10 p-5">
+        <p class="font-display text-lg font-bold text-perla">{t("contact.cvTitle")}</p>
+        <p class="mt-1 text-sm text-bruma">{t("contact.cvDesc")}</p>
+        <a
+          href={site.cv[lang]}
+          download
+          class="mt-4 inline-flex items-center gap-2 rounded-md bg-violeta px-5 py-2.5 font-display font-medium text-perla shadow-glow-violeta transition hover:shadow-glow-cian"
+        >
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"></path>
+          </svg>
+          {t("hero.ctaCv")}
+        </a>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <!-- <div
+      data-revelar
+      data-retraso="120"
+      class="rounded-md border border-cian/25 bg-marino/40 p-6 shadow-glow-violeta backdrop-blur sm:p-8"
+    >
+      <h3 class="mb-5 font-display text-xl font-bold text-perla">{t("contact.formTitle")}</h3>
+      <ContactForm lang={lang} />
+    </div> -->
+  </div>
+</section>

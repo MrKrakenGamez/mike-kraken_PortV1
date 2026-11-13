@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CaseStudy from "../../components/projects/CaseStudy.astro";
+import { casos } from "../../data/projects";
+
+// Una página estática por cada caso de estudio
+export function getStaticPaths() {
+  return casos.es.map((caso) => ({ params: { slug: caso.slug }, props: { caso } }));
+}
+
+const { caso } = Astro.props;
+---
+
+<BaseLayout title={`${caso.titulo} | Mike Kraken`} description={caso.resumen}>
+  <CaseStudy caso={caso} />
+</BaseLayout>

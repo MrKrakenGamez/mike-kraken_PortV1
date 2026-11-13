@@ -1,0 +1,158 @@
+---
+import type { Lang } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Estilo común de los campos
+const campo =
+  "w-full rounded-md border border-bruma/30 bg-abismo/60 px-4 py-3 text-perla placeholder:text-bruma/60 transition focus:border-cian focus:outline-none";
+const etiqueta = "mb-1.5 block font-mono text-xs text-bruma";
+---
+
+<!--
+  Netlify Forms detecta este formulario al desplegar (data-netlify) y lo protege con el honeypot "bot-field".
+  Si usas Formspree, el script de abajo lo envía allí (ver site.formulario en src/data/site.ts).
+-->
+<form
+  name="contacto"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  data-form-contacto
+  data-msg-enviando={t("contact.sending")}
+  data-msg-ok={t("contact.ok")}
+  data-msg-error={t("contact.error")}
+  data-msg-dev={t("contact.dev")}
+  class="space-y-5"
+>
+  <input type="hidden" name="form-name" value="contacto" />
+
+  <!-- Honeypot: oculto para personas, los bots lo llenan -->
+  <p class="hidden">
+    <label>{t("contact.honeypot")} <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div>
+    <label for="c-nombre" class={etiqueta}>{t("contact.name")}</label>
+    <input id="c-nombre" name="nombre" type="text" required autocomplete="name" class={campo} />
+  </div>
+
+  <div>
+    <label for="c-email" class={etiqueta}>{t("contact.email")}</label>
+    <input id="c-email" name="email" type="email" required autocomplete="email" class={campo} />
+  </div>
+
+  <div>
+    <label for="c-motivo" class={etiqueta}>{t("contact.reason")}</label>
+    <select id="c-motivo" name="motivo" class={campo}>
+      <option value="empleo">{t("contact.reason.job")}</option>
+      <option value="freelance">{t("contact.reason.freelance")}</option>
+      <option value="otro">{t("contact.reason.other")}</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="c-mensaje" class={etiqueta}>{t("contact.message")}</label>
+    <textarea id="c-mensaje" name="mensaje" rows="5" required minlength="10" class={campo}
+    ></textarea>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-4">
+    <button
+      type="submit"
+      class="inline-flex items-center rounded-md bg-violeta px-6 py-3 font-display font-medium text-perla shadow-glow-violeta transition hover:shadow-glow-cian disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      {t("contact.send")}
+    </button>
+    <p class="text-xs text-bruma">{t("contact.privacy")}</p>
+  </div>
+
+  <!-- Estado del envío (lo actualiza el script) -->
+  <p data-estado role="status" aria-live="polite" class="min-h-5 text-sm"></p>
+</form>
+
+<script>
+  import { site } from "../../data/site";
+
+  const form = document.querySelector<HTMLFormElement>("[data-form-contacto]");
+
+  if (form) {
+    const estado = form.querySelector<HTMLElement>("[data-estado]");
+    const boton = form.querySelector<HTMLButtonElement>("button[type=submit]");
+
+    const mostrar = (texto: string, tipo: "info" | "ok" | "error") => {
+      if (!estado) return;
+      const color = tipo === "ok" ? "text-cian" : tipo === "error" ? "text-error" : "text-bruma";
+      estado.className = `min-h-5 text-sm ${color}`;
+      estado.textContent = texto;
+    };
+
+    // Si falla el envío, se ofrece el correo directo como alternativa
+    const mostrarError = () => {
+      mostrar(`${form.dataset.msgError ?? ""} `, "error");
+      const enlace = document.createElement("a");
+      enlace.href = `mailto:${site.email}`;
+      enlace.textContent = site.email;
+      enlace.className = "underline";
+      estado?.append(enlace);
+    };
+
+    form.addEventListener("submit", async (evento) => {
+      evento.preventDefault();
+      const datos = new FormData(form);
+
+      // Honeypot lleno = bot: se simula éxito sin enviar nada
+      if (datos.get("bot-field")) {
+        mostrar(form.dataset.msgOk ?? "", "ok");
+        return;
+      }
+
+      // En desarrollo no hay servidor de formularios: se muestra el aviso y los datos van a la consola
+      if (import.meta.env.DEV) {
+        console.info("[Contacto] Datos (no se envían en desarrollo):", Object.fromEntries(datos));
+        mostrar(form.dataset.msgDev ?? "", "info");
+        return;
+      }
+
+      if (boton) boton.disabled = true;
+      mostrar(form.dataset.msgEnviando ?? "", "info");
+
+      try {
+        let respuesta: Response;
+
+        if (site.formulario.proveedor === "formspree") {
+          respuesta = await fetch(site.formulario.formspreeUrl, {
+            method: "POST",
+            body: datos,
+            headers: { Accept: "application/json" },
+          });
+        } else {
+          // Netlify Forms: POST urlencoded a una página existente, incluyendo "form-name"
+          const cuerpo = new URLSearchParams();
+          datos.forEach((valor, clave) => {
+            if (typeof valor === "string") cuerpo.append(clave, valor);
+          });
+          respuesta = await fetch(window.location.pathname, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: cuerpo.toString(),
+          });
+        }
+
+        if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
+        form.reset();
+        mostrar(form.dataset.msgOk ?? "", "ok");
+      } catch {
+        mostrarError();
+      } finally {
+        if (boton) boton.disabled = false;
+      }
+    });
+  }
+</script>
